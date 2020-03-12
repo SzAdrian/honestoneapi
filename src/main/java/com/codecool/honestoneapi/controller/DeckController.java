@@ -9,17 +9,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/deck")
+@CrossOrigin
 public class DeckController {
     @Autowired
     private DeckService deckService;
 
-    @CrossOrigin
     @PostMapping("/save")
     public void saveDeck(@RequestBody Deck deck) {
+        System.out.println(deck);
         deckService.saveDeck(deck);
     }
 
-    @CrossOrigin
     @GetMapping("/get/{id}")
     public List<Deck> getDecksById(@PathVariable("id") Integer id){
         return deckService.getDecksByUserId(id);

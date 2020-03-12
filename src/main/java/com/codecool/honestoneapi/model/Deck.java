@@ -2,10 +2,10 @@ package com.codecool.honestoneapi.model;
 
 public class Deck {
     private String deckcode;
-    private Integer hero;
-    private Integer format;
+    private int hero;
+    private int format;
     private String name;
-    private Integer userId;
+    private int userId;
 
     public String getDeckcode() {
         return deckcode;
@@ -15,19 +15,19 @@ public class Deck {
         this.deckcode = deckcode;
     }
 
-    public Integer getHero() {
+    public int getHero() {
         return hero;
     }
 
-    public void setHero(Integer hero) {
+    public void setHero(int hero) {
         this.hero = hero;
     }
 
-    public Integer getFormat() {
+    public int getFormat() {
         return format;
     }
 
-    public void setFormat(Integer format) {
+    public void setFormat(int format) {
         this.format = format;
     }
 
@@ -39,11 +39,20 @@ public class Deck {
         this.name = name;
     }
 
-    public void setUserId(Integer userId) {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "deckcode='" + deckcode + '\'' +
+                ", hero=" + hero +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
