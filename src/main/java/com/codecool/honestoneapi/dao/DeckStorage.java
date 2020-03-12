@@ -1,7 +1,6 @@
 package com.codecool.honestoneapi.dao;
 
 import com.codecool.honestoneapi.model.Deck;
-import com.intellij.openapi.vcs.history.VcsRevisionNumber;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
