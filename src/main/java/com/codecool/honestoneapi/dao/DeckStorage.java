@@ -17,7 +17,7 @@ public class DeckStorage {
 
     public List<Deck> getDecksByUserId(Integer userId) {
         return deckStorage.stream()
-                .filter(deck -> deck.getUserId().equals(userId))
+                .filter(deck -> deck.getUserId() == userId)
                 .collect(Collectors.toList());
     }
 }
