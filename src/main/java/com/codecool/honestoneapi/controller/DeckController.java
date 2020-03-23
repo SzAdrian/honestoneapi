@@ -16,13 +16,12 @@ public class DeckController {
 
     @PostMapping("/save")
     public void saveDeck(@RequestBody Deck deck) {
-        System.out.println(deck);
         deckService.saveDeck(deck);
     }
-
-    @GetMapping("/get/{id}")
-    public List<Deck> getDecksById(@PathVariable("id") Integer id){
-        return deckService.getDecksByUserId(id);
-    }
+//
+//    @GetMapping("/get/{id}")
+//    public List<Deck> getDecksById(@PathVariable("id") Integer id){
+//        return deckService.getDecksByUserId(id);
+//    }
 }
 

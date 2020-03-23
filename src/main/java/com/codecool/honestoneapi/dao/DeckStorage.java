@@ -1,6 +1,8 @@
 package com.codecool.honestoneapi.dao;
 
 import com.codecool.honestoneapi.model.Deck;
+import com.codecool.honestoneapi.repository.DeckRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,15 +11,17 @@ import java.util.stream.Collectors;
 
 @Repository
 public class DeckStorage {
-    private List<Deck> deckStorage = new ArrayList<>();
+
+    @Autowired
+    DeckRepository deckRepository;
 
     public void saveDeck(Deck deck) {
-        deckStorage.add(deck);
+        deckRepository.save(deck);
     }
-
-    public List<Deck> getDecksByUserId(Integer userId) {
-        return deckStorage.stream()
-                .filter(deck -> deck.getUserId() == userId)
-                .collect(Collectors.toList());
-    }
+//
+//    public List<Deck> getDecksByUserId(Integer userId) {
+//        return deckStorage.stream()
+//                .filter(deck -> deck.getUserId() == userId)
+//                .collect(Collectors.toList());
+//    }
 }

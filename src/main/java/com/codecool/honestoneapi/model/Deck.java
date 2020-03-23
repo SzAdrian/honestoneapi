@@ -1,58 +1,31 @@
 package com.codecool.honestoneapi.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
 public class Deck {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
     private String deckcode;
+
     private int hero;
+
     private int format;
+
     private String name;
-    private int userId;
 
-    public String getDeckcode() {
-        return deckcode;
-    }
-
-    public void setDeckcode(String deckcode) {
-        this.deckcode = deckcode;
-    }
-
-    public int getHero() {
-        return hero;
-    }
-
-    public void setHero(int hero) {
-        this.hero = hero;
-    }
-
-    public int getFormat() {
-        return format;
-    }
-
-    public void setFormat(int format) {
-        this.format = format;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "Deck{" +
-                "deckcode='" + deckcode + '\'' +
-                ", hero=" + hero +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
