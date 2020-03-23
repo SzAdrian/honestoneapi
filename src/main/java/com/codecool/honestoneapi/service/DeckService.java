@@ -13,7 +13,7 @@ public class DeckService {
     @Autowired
     private DeckStorage deckStorage;
 
-    public void saveDeck(@RequestBody Deck deck){
+    public void saveDeck(Deck deck){
         deckStorage.saveDeck(deck);
     }
 

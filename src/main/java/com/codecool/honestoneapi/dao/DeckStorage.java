@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class DeckStorage {
-    private List<Deck> deckStorage = new ArrayList();
+    private List<Deck> deckStorage = new ArrayList<>();
 
     public void saveDeck(Deck deck) {
         deckStorage.add(deck);
