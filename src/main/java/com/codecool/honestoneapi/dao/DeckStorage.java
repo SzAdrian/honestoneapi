@@ -18,10 +18,12 @@ public class DeckStorage {
     public void saveDeck(Deck deck) {
         deckRepository.save(deck);
     }
-//
-//    public List<Deck> getDecksByUserId(Integer userId) {
+
+    public List<Deck> getDecksByUserId(Long userId) {
+        return deckRepository.findAll();
+
 //        return deckStorage.stream()
 //                .filter(deck -> deck.getUserId() == userId)
 //                .collect(Collectors.toList());
-//    }
+    }
 }
