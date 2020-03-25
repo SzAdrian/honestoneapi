@@ -21,7 +21,7 @@ public class Deck {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
