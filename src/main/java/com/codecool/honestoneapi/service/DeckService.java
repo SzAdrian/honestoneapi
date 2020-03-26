@@ -24,4 +24,11 @@ public class DeckService {
     public void deleteDeckById(Long deckId) {
         deckStorage.deleteDeckById(deckId);
     }
+
+    public Deck updateDeck(Deck deck) {
+        return deckStorage.updateDeck(deck);
+    }
+    public boolean isDeckAlreadySaved(Deck deck){
+        return deckStorage.isDeckAlreadySaved(deck);
+    }
 }

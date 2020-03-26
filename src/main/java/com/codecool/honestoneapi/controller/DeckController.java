@@ -16,6 +16,9 @@ public class DeckController {
 
     @PostMapping("/save")
     public Deck saveDeck(@RequestBody Deck deck, @RequestHeader("user-id") String userId) {
+        if(deckService.isDeckAlreadySaved(deck)){
+            return deckService.updateDeck(deck);
+        }
         return deckService.saveDeck(deck, Long.valueOf(userId));
     }
 
@@ -27,6 +30,11 @@ public class DeckController {
     @DeleteMapping("/{deckId}")
     public void deleteDeckById(@PathVariable("deckId") Long deckId) {
         deckService.deleteDeckById(deckId);
+    }
+
+    @PutMapping("")
+    public void updateDeck(@RequestBody Deck deck){
+        deckService.updateDeck(deck);
     }
 }
 

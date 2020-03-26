@@ -28,10 +28,19 @@ public class DeckStorage {
     }
 
     public List<Deck> getDecksByUserId(Integer userId) {
-        return deckRepository.findByUserId(Long.valueOf(userId));
+        return deckRepository.findByUserIdOrderById(Long.valueOf(userId));
     }
 
     public void deleteDeckById(Long deckId) {
         deckRepository.deleteById(deckId);
+    }
+
+    public Deck updateDeck(Deck deck) {
+       deckRepository.updateDeckById(deck.getId(),deck.getName(),deck.getDeckcode());
+       return deckRepository.findById(deck.getId()).get();
+    }
+
+    public boolean isDeckAlreadySaved(Deck deck) {
+        return deckRepository.existsById(deck.getId());
     }
 }
