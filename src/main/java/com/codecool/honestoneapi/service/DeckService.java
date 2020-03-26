@@ -13,11 +13,11 @@ public class DeckService {
     @Autowired
     private DeckStorage deckStorage;
 
-    public void saveDeck(Deck deck){
-        deckStorage.saveDeck(deck);
+    public void saveDeck(Deck deck, Long userId){
+        deckStorage.saveDeck(deck,userId);
     }
-//
-//    public List<Deck> getDecksByUserId(Integer id) {
-//        return deckStorage.getDecksByUserId(id);
-//    }
+
+    public List<Deck> getDecksByUserId(Integer id) {
+        return deckStorage.getDecksByUserId(id);
+    }
 }

@@ -1,13 +1,16 @@
 package com.codecool.honestoneapi.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
+import org.apache.catalina.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +22,12 @@ public class Deck {
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonBackReference
+    private Usr user;
 
     private String deckcode;
 

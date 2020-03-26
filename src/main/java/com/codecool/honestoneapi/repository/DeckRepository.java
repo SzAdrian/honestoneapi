@@ -7,8 +7,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface DeckRepository extends JpaRepository<Deck,Long> {
 
-    @Query("SELECT d.deckcode FROM Deck d")
-    List<Deck> findDeckByUserId(@Param("userId") Long id);
+
+    List<Deck> findByUserId(Long user_id);
+
 }

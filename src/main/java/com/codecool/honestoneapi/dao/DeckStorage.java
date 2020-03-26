@@ -1,29 +1,33 @@
 package com.codecool.honestoneapi.dao;
 
 import com.codecool.honestoneapi.model.Deck;
+import com.codecool.honestoneapi.model.Usr;
 import com.codecool.honestoneapi.repository.DeckRepository;
+import com.codecool.honestoneapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
 public class DeckStorage {
 
     @Autowired
-    DeckRepository deckRepository;
+    private DeckRepository deckRepository;
 
-    public void saveDeck(Deck deck) {
-        deckRepository.save(deck);
+    @Autowired
+    private UserRepository userRepository;
+
+    public void saveDeck(Deck deck, Long userId) {
+        Usr user = userRepository.findById(userId).get();
+        user.addDeck(deck);
+        userRepository.save(user);
     }
 
-    public List<Deck> getDecksByUserId(Long userId) {
-        return deckRepository.findAll();
-
-//        return deckStorage.stream()
-//                .filter(deck -> deck.getUserId() == userId)
-//                .collect(Collectors.toList());
+    public List<Deck> getDecksByUserId(Integer userId) {
+        return deckRepository.findByUserId(Long.valueOf(userId));
     }
 }
