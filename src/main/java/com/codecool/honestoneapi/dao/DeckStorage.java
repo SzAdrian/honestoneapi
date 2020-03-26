@@ -21,13 +21,17 @@ public class DeckStorage {
     @Autowired
     private UserRepository userRepository;
 
-    public void saveDeck(Deck deck, Long userId) {
+    public Deck saveDeck(Deck deck, Long userId) {
         Usr user = userRepository.findById(userId).get();
-        user.addDeck(deck);
-        userRepository.save(user);
+        deck.setUser(user);
+        return deckRepository.save(deck);
     }
 
     public List<Deck> getDecksByUserId(Integer userId) {
         return deckRepository.findByUserId(Long.valueOf(userId));
+    }
+
+    public void deleteDeckById(Long deckId) {
+        deckRepository.deleteById(deckId);
     }
 }
