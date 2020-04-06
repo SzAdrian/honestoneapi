@@ -2,7 +2,9 @@ package com.codecool.honestoneapi.controller;
 
 import com.codecool.honestoneapi.controller.dto.UserCredentials;
 import com.codecool.honestoneapi.security.JwtUtil;
+import com.codecool.honestoneapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,8 @@ import java.time.Duration;
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserService userService;
+
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserCredentials user, HttpServletResponse response) {
@@ -33,6 +37,12 @@ public class AuthController {
         addTokenToCookie(response, jwtToken);
 
         return ResponseEntity.ok().body(user.getUsername());
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody UserCredentials userCredentials){
+        userService.register(userCredentials);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userCredentials.getUsername());
     }
 
     private void addTokenToCookie(HttpServletResponse response, String token) {

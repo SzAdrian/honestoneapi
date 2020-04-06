@@ -20,6 +20,11 @@ public class UserStorage {
         return userRepository.findUsrByUsername(user.getUsername()).getId();
     }
 
+    public Usr registerReturnUser(Usr user){
+        user.setRegistrationTime(LocalDateTime.now());
+        return userRepository.save(user);
+    }
+
     public Long login(String username, String password){
         Usr user = userRepository.findUsrByUsername(username);
         if (user!= null && user.getPassword().equals(password)){
