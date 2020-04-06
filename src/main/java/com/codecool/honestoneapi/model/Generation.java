@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/*
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,9 +21,10 @@ public class Generation {
     @GeneratedValue
     private long id;
 
-    private long deck_id;
+    private Deck deck;
 
-    private long statistics_id;
+    private Stat stat;
 
     private long generation_count;
 }
+*/

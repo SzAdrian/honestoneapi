@@ -3,6 +3,8 @@ package com.codecool.honestoneapi.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -23,6 +25,7 @@ public class Usr {
     @Column(unique = true)
     private String email;
 
+    @NotBlank
     private String password;
 
     private LocalDateTime registrationTime;
@@ -32,6 +35,11 @@ public class Usr {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<Deck> decks;
+
+    @ElementCollection
+    @Singular
+    @NotEmpty
+    private Set<Role> roles;
 
     public void addDeck(Deck deck){
         deck.setUser(this);

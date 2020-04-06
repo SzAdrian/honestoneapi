@@ -33,4 +33,6 @@ public class Deck {
 
     private String name;
 
+    //private Generation generation;
+
 }
