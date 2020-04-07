@@ -17,7 +17,7 @@ public class DeckService {
         return deckStorage.saveDeck(deck,userId);
     }
 
-    public List<Deck> getDecksByUserId(Integer id) {
+    public List<Deck> getDecksByUserId(Long id) {
         return deckStorage.getDecksByUserId(id);
     }
 
