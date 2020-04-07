@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    public static final String TOKEN = "access_token";
+    public static final String TOKEN = "token";
     private final JwtUtil jwtUtil;
 
     @Override
