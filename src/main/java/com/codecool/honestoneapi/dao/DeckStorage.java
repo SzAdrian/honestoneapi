@@ -36,7 +36,7 @@ public class DeckStorage {
     }
 
     public Deck updateDeck(Deck deck) {
-       deckRepository.updateDeckById(deck.getId(),deck.getName(),deck.getDeckcode());
+       deckRepository.updateDeckById(deck.getId(),deck.getName(),deck.getDeckcode(),deck.isPublished());
        return deckRepository.findById(deck.getId()).get();
     }
 
