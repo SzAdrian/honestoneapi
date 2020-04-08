@@ -1,9 +1,12 @@
 package com.codecool.honestoneapi.controller;
 
 import com.codecool.honestoneapi.controller.dto.UserCredentials;
+import com.codecool.honestoneapi.controller.dto.UserResponseCredentials;
+import com.codecool.honestoneapi.repository.UserRepository;
 import com.codecool.honestoneapi.security.JwtUtil;
 import com.codecool.honestoneapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +26,16 @@ import java.time.Duration;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
     private final UserService userService;
 
+    @Value("${jwt.expiration.hours}")
+    private int jwtExpirationHours;
+
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserCredentials user, HttpServletResponse response) {
+    public ResponseEntity<UserResponseCredentials> login(@RequestBody UserCredentials user, HttpServletResponse response) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 user.getUsername(), user.getPassword()));
@@ -36,7 +43,7 @@ public class AuthController {
         String jwtToken = jwtUtil.generateToken(authentication);
         addTokenToCookie(response, jwtToken);
 
-        return ResponseEntity.ok().body(user.getUsername());
+        return ResponseEntity.ok().body(userService.getUserResponseCredentials(user));
     }
 
     @PostMapping("/register")
@@ -46,11 +53,12 @@ public class AuthController {
     }
 
     private void addTokenToCookie(HttpServletResponse response, String token) {
+
         ResponseCookie cookie = ResponseCookie.from("token", token)
                 .domain("localhost") // should be parameterized
                 .sameSite("Strict")  // CSRF
 //                .secure(true)
-                .maxAge(Duration.ofHours(24))
+                .maxAge(Duration.ofHours(jwtExpirationHours))
                 .httpOnly(true)      // XSS
                 .path("/")
                 .build();

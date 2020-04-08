@@ -1,15 +1,14 @@
 package com.codecool.honestoneapi.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserCredentials {
-
+@AllArgsConstructor
+public class UserResponseCredentials {
     private String username;
-    private String password;
-    private String email;
-
+    private Long id;
 
 }

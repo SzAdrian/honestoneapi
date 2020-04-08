@@ -33,5 +33,7 @@ public class UserStorage {
         return -1L;
     }
 
-
+    public Usr findUsrByUsername(String username) {
+        return userRepository.findUsrByUsername(username);
+    }
 }

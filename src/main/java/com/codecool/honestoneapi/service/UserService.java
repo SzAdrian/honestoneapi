@@ -1,6 +1,7 @@
 package com.codecool.honestoneapi.service;
 
 import com.codecool.honestoneapi.controller.dto.UserCredentials;
+import com.codecool.honestoneapi.controller.dto.UserResponseCredentials;
 import com.codecool.honestoneapi.dao.UserStorage;
 import com.codecool.honestoneapi.model.Role;
 import com.codecool.honestoneapi.model.Usr;
@@ -44,5 +45,9 @@ public class UserService {
         long login = userStorage.login(username, password);
         if(login != -1) return login;
         return -1L;
+    }
+
+    public UserResponseCredentials getUserResponseCredentials(UserCredentials user) {
+        return new UserResponseCredentials(user.getUsername(),userStorage.findUsrByUsername(user.getUsername()).getId());
     }
 }
