@@ -23,7 +23,7 @@ public class DeckController {
     }
 
     @GetMapping("/get/{id}")
-    public List<Deck> getDecksById(@PathVariable("id") Integer id) {
+    public List<Deck> getDecksById(@PathVariable("id") Long id) {
         return deckService.getDecksByUserId(id);
     }
 

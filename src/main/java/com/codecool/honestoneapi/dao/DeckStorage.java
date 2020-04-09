@@ -27,8 +27,8 @@ public class DeckStorage {
         return deckRepository.save(deck);
     }
 
-    public List<Deck> getDecksByUserId(Integer userId) {
-        return deckRepository.findByUserIdOrderById(Long.valueOf(userId));
+    public List<Deck> getDecksByUserId(Long userId) {
+        return deckRepository.findByUserIdOrderById(userId);
     }
 
     public void deleteDeckById(Long deckId) {

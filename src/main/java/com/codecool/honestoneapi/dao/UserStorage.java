@@ -36,4 +36,13 @@ public class UserStorage {
     public Usr findUsrByUsername(String username) {
         return userRepository.findUsrByUsername(username);
     }
+
+    public String getUsernameById(Long id) {
+        Usr user = userRepository.findById(id).get();
+        return user.getUsername();
+    }
+
+    public LocalDateTime getRegistrationDateById(Long id) {
+        return userRepository.findById(id).get().getRegistrationTime();
+    }
 }
