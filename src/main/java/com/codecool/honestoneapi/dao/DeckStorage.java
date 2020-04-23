@@ -1,16 +1,17 @@
 package com.codecool.honestoneapi.dao;
 
+import com.codecool.honestoneapi.controller.dto.PublishedDeckDto;
 import com.codecool.honestoneapi.model.Deck;
 import com.codecool.honestoneapi.model.Usr;
 import com.codecool.honestoneapi.repository.DeckRepository;
 import com.codecool.honestoneapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
 public class DeckStorage {
@@ -36,11 +37,32 @@ public class DeckStorage {
     }
 
     public Deck updateDeck(Deck deck) {
-       deckRepository.updateDeckById(deck.getId(),deck.getName(),deck.getDeckcode(),deck.isPublished());
-       return deckRepository.findById(deck.getId()).get();
+        //deckRepository.updateDeckById(deck.getId(), deck.getName(), deck.getDeckcode(), deck.isPublished());
+        Deck deckToUpdate = deckRepository.findById(deck.getId()).get();
+        deckToUpdate.setName(deck.getName());
+        deckToUpdate.setDeckcode(deck.getDeckcode());
+        deckToUpdate.setUpdateTime(LocalDateTime.now());
+        deckToUpdate.setPublished(deck.isPublished());
+        deckRepository.save(deckToUpdate);
+        return deckToUpdate;
     }
 
     public boolean isDeckAlreadySaved(Deck deck) {
         return deckRepository.existsById(deck.getId());
+    }
+
+    public void updatePublished(PublishedDeckDto deck) {
+        Deck deckToUpdate = deckRepository.findById(deck.getId()).get();
+        deckToUpdate.setPublished(deck.getPublished());
+        deckRepository.save(deckToUpdate);
+    }
+
+    public List<Deck> getAllPublicDecks() {
+        return deckRepository.getAllPublic();
+
+    }
+
+    public List<Deck> getMostRecentDecks(Integer limit) {
+        return deckRepository.getMostRecentDecks();
     }
 }

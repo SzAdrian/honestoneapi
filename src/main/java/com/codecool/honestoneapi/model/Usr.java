@@ -1,5 +1,7 @@
 package com.codecool.honestoneapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,22 +25,26 @@ public class Usr {
     private String username;
 
     @Column(unique = true)
+    @JsonIgnore
     private String email;
 
     @NotBlank
+    @JsonIgnore
+
     private String password;
 
+    @JsonIgnore
     private LocalDateTime registrationTime;
 
     @Singular
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
+    @JsonBackReference
     private Set<Deck> decks;
 
     @ElementCollection
     @Singular
     @NotEmpty
+    @JsonIgnore
     private Set<Role> roles;
 
     public void addDeck(Deck deck){
