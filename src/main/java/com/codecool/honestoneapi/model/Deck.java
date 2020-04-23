@@ -1,12 +1,11 @@
 package com.codecool.honestoneapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -20,9 +19,6 @@ public class Deck {
     private Long id;
 
     @ManyToOne
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JsonBackReference
     private Usr user;
 
     private String deckcode;
@@ -34,6 +30,8 @@ public class Deck {
     private String name;
 
     private boolean published;
+
+    private LocalDateTime updateTime;
 
     //private Generation generation;
 
