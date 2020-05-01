@@ -30,7 +30,6 @@ public class Usr {
 
     @NotBlank
     @JsonIgnore
-
     private String password;
 
     @JsonIgnore
@@ -47,8 +46,11 @@ public class Usr {
     @JsonIgnore
     private Set<Role> roles;
 
-    public void addDeck(Deck deck){
-        deck.setUser(this);
-        decks.add(deck);
-    }
+    @ElementCollection
+    @Singular
+    private Set<Long> likedDecks;
+
+    @ElementCollection
+    @Singular
+    private Set<Long> dislikedDecks;
 }

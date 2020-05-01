@@ -45,4 +45,8 @@ public class UserStorage {
     public LocalDateTime getRegistrationDateById(Long id) {
         return userRepository.findById(id).get().getRegistrationTime();
     }
+
+    public void save(Usr usr) {
+        userRepository.save(usr);
+    }
 }

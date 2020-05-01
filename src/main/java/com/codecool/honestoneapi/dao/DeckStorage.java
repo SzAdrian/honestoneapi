@@ -65,4 +65,12 @@ public class DeckStorage {
     public List<Deck> getMostRecentDecks(Integer limit) {
         return deckRepository.getMostRecentDecks();
     }
+
+    public Deck findDeckById(Long id) {
+        return deckRepository.findById(id).get();
+    }
+
+    public void save(Deck deck) {
+        deckRepository.save(deck);
+    }
 }

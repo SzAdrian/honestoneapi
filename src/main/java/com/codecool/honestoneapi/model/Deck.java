@@ -33,6 +33,8 @@ public class Deck {
 
     private LocalDateTime updateTime;
 
+    private int votes;
+
     //private Generation generation;
 
 }

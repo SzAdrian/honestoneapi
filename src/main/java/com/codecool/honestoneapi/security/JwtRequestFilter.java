@@ -1,6 +1,7 @@
 package com.codecool.honestoneapi.security;
 
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -19,16 +20,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter {
 
-    public static final String TOKEN = "token";
     private final JwtUtil jwtUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        Optional<Cookie> jwtToken =
-                Arrays.stream(Optional.ofNullable(request.getCookies()).orElse(new Cookie[]{}))
-                        .filter(cookie -> cookie.getName().equals(TOKEN))
-                        .findFirst();
+        Optional<Cookie> jwtToken = jwtUtil.getTokenCookie(request);
         if (jwtToken.isPresent()) {
             UsernamePasswordAuthenticationToken userToken = jwtUtil.validateTokenAndExtractUser(jwtToken.get().getValue());
 
@@ -36,4 +33,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
+
 }

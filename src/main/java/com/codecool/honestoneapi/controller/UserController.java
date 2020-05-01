@@ -14,15 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private ProfileService profileService;
-
-    @PostMapping("/login")
-    public Long login(@RequestBody Usr user){
-        return userService.login(user.getUsername(),user.getPassword());
-    }
 
 
     @GetMapping("/profile/{id}")

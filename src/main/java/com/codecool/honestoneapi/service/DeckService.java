@@ -1,8 +1,11 @@
 package com.codecool.honestoneapi.service;
 
+import com.codecool.honestoneapi.controller.dto.DeckUserInfoDto;
 import com.codecool.honestoneapi.controller.dto.PublishedDeckDto;
 import com.codecool.honestoneapi.dao.DeckStorage;
+import com.codecool.honestoneapi.dao.UserStorage;
 import com.codecool.honestoneapi.model.Deck;
+import com.codecool.honestoneapi.model.Usr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import java.util.List;
 public class DeckService {
     @Autowired
     private DeckStorage deckStorage;
+    @Autowired
+    private UserStorage userStorage;
 
     public Deck saveDeck(Deck deck, Long userId){
         deck.setUpdateTime(LocalDateTime.now());
@@ -45,4 +50,42 @@ public class DeckService {
     public List<Deck> getMostRecentDecks(Integer limit) {
         return deckStorage.getMostRecentDecks(limit);
     }
+
+    public void like(DeckUserInfoDto data) {
+        Usr usr = userStorage.findUsrByUsername(data.getUsername());
+        Deck deck = deckStorage.findDeckById(data.getDeckId());
+        resetVotes(usr, deck);
+        deck.setVotes(deck.getVotes()+1);
+        usr.getLikedDecks().add(deck.getId());
+        userStorage.save(usr);
+        deckStorage.save(deck);
+    }
+
+    public void unlike(DeckUserInfoDto data) {
+        Usr usr = userStorage.findUsrByUsername(data.getUsername());
+        Deck deck = deckStorage.findDeckById(data.getDeckId());
+        resetVotes(usr, deck);
+        userStorage.save(usr);
+        deckStorage.save(deck);
+    }
+
+    public void dislike(DeckUserInfoDto data) {
+        Usr usr = userStorage.findUsrByUsername(data.getUsername());
+        Deck deck = deckStorage.findDeckById(data.getDeckId());
+        resetVotes(usr, deck);
+        deck.setVotes(deck.getVotes()-1);
+        usr.getDislikedDecks().add(deck.getId());
+        userStorage.save(usr);
+        deckStorage.save(deck);
+    }
+
+    private void resetVotes(Usr usr, Deck deck) {
+        if (usr.getLikedDecks().remove(deck.getId())) {
+            deck.setVotes(deck.getVotes()-1);
+        }
+        else if(usr.getDislikedDecks().remove(deck.getId())){
+            deck.setVotes(deck.getVotes()+1);
+        }
+    }
+
 }
