@@ -14,23 +14,9 @@ public class UserStorage {
     @Autowired
     private UserRepository userRepository;
 
-    public Long register(Usr user){
-        user.setRegistrationTime(LocalDateTime.now());
-        userRepository.save(user);
-        return userRepository.findUsrByUsername(user.getUsername()).getId();
-    }
-
     public Usr registerReturnUser(Usr user){
         user.setRegistrationTime(LocalDateTime.now());
         return userRepository.save(user);
-    }
-
-    public Long login(String username, String password){
-        Usr user = userRepository.findUsrByUsername(username);
-        if (user!= null && user.getPassword().equals(password)){
-            return user.getId();
-        }
-        return -1L;
     }
 
     public Usr findUsrByUsername(String username) {

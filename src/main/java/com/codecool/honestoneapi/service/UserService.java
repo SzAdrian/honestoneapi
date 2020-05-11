@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.UnsatisfiedServletRequestParameterException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +19,6 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
-    public Long register(Usr user){
-        return userStorage.register(user);
-    }
 
 
     public Usr register(String username, String password) {
@@ -41,11 +35,6 @@ public class UserService {
         return register(userCredentials.getUsername(), userCredentials.getPassword());
     }
 
-    public Long login(String username, String password) {
-        long login = userStorage.login(username, password);
-        if(login != -1) return login;
-        return -1L;
-    }
 
     public UserResponseCredentials getUserResponseCredentials(UserCredentials user) {
         return new UserResponseCredentials(user.getUsername(),userStorage.findUsrByUsername(user.getUsername()).getId());

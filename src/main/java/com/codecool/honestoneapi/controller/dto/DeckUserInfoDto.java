@@ -29,6 +29,12 @@ public class DeckUserInfoDto {
 
     private LocalDateTime updateTime;
 
+    private int votes;
+
+    private boolean liked;
+
+    private boolean disliked;
+
     private Long userId;
 
     private String username;

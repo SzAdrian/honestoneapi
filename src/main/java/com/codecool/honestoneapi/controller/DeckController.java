@@ -2,10 +2,10 @@ package com.codecool.honestoneapi.controller;
 
 import com.codecool.honestoneapi.controller.dto.PublishedDeckDto;
 import com.codecool.honestoneapi.model.Deck;
-import com.codecool.honestoneapi.model.Vote;
 import com.codecool.honestoneapi.service.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class DeckController {
         return deckService.saveDeck(deck, Long.valueOf(userId));
     }
 
-    @GetMapping("/get/{id}")
-    public List<Deck> getDecksById(@PathVariable("id") Long id) {
+    @GetMapping("/get/{userId}")
+    public List<Deck> getDecksForUser(@PathVariable("userId") Long id) {
         return deckService.getDecksByUserId(id);
     }
 

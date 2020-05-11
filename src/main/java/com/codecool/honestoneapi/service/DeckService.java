@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DeckService {
@@ -49,7 +50,22 @@ public class DeckService {
 
     public List<Deck> getMostRecentDecks(Integer limit) {
         return deckStorage.getMostRecentDecks(limit);
+
+       //return decks.stream().map(deck -> buildDtoFromDeck(deck)).collect(Collectors.toList());
     }
+//    private DeckUserInfoDto buildDtoFromDeck(Deck deck) {
+//        return DeckUserInfoDto.builder()
+//                .deckcode(deck.getDeckcode())
+//                .deckId(deck.getId())
+//                .format(deck.getFormat())
+//                .hero(deck.getHero())
+//                .name(deck.getName())
+//                .published(deck.isPublished())
+//                .updateTime(deck.getUpdateTime())
+//                .userId(deck.getUser().getId())
+//                .username(deck.getUser().getUsername())
+//                .votes(deck.getVotes())
+//    }
 
     public void like(DeckUserInfoDto data) {
         Usr usr = userStorage.findUsrByUsername(data.getUsername());
