@@ -52,7 +52,7 @@ public class AuthController {
     private void addTokenToCookie(HttpServletResponse response, String token) {
 
         ResponseCookie cookie = ResponseCookie.from("token", token)
-                .domain("honestone.netlify.app") // should be parameterized
+                .domain("honestone.herokuapp.com") // should be parameterized
                 .sameSite("Strict")  // CSRF
 //                .secure(true)
                 .maxAge(Duration.ofHours(jwtExpirationHours))
