@@ -54,7 +54,7 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from("token", token)
                 .domain("honestone.herokuapp.com") // should be parameterized
                 .sameSite("Strict")  // CSRF
-//                .secure(true)
+                .secure(true)
                 .maxAge(Duration.ofHours(jwtExpirationHours))
                 .httpOnly(true)      // XSS
                 .path("/")
