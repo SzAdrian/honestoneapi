@@ -46,7 +46,7 @@ public class DeckController {
     }
 
     @GetMapping("/all-public")
-    public List<Deck> getAllPublicDecks() {
+    public List<DeckUserInfoDto> getAllPublicDecks() {
         return deckService.getAllPublicDecks();
     }
 
