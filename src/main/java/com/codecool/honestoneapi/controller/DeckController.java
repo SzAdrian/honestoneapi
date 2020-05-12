@@ -1,5 +1,6 @@
 package com.codecool.honestoneapi.controller;
 
+import com.codecool.honestoneapi.controller.dto.DeckUserInfoDto;
 import com.codecool.honestoneapi.controller.dto.PublishedDeckDto;
 import com.codecool.honestoneapi.model.Deck;
 import com.codecool.honestoneapi.service.DeckService;
@@ -50,7 +51,7 @@ public class DeckController {
     }
 
     @GetMapping("/most-recent/{limit}")
-    public List<Deck> getMostRecentDecks(@PathVariable("limit") Integer limit) {
+    public List<DeckUserInfoDto> getMostRecentDecks(@PathVariable("limit") Integer limit) {
         return deckService.getMostRecentDecks(limit);
     }
 

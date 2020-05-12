@@ -44,28 +44,31 @@ public class DeckService {
         deckStorage.updatePublished(deck);
     }
 
-    public List<Deck> getAllPublicDecks() {
-        return deckStorage.getAllPublicDecks();
+    public List<DeckUserInfoDto> getAllPublicDecks() {
+        List<Deck> decks =   deckStorage.getAllPublicDecks();
+        return decks.stream().map(this::buildDtoFromDeck).collect(Collectors.toList());
+
     }
 
-    public List<Deck> getMostRecentDecks(Integer limit) {
-        return deckStorage.getMostRecentDecks(limit);
+    public List<DeckUserInfoDto> getMostRecentDecks(Integer limit) {
+        List<Deck> decks =  deckStorage.getMostRecentDecks(limit);
 
-       //return decks.stream().map(deck -> buildDtoFromDeck(deck)).collect(Collectors.toList());
+       return decks.stream().map(this::buildDtoFromDeck).collect(Collectors.toList());
     }
-//    private DeckUserInfoDto buildDtoFromDeck(Deck deck) {
-//        return DeckUserInfoDto.builder()
-//                .deckcode(deck.getDeckcode())
-//                .deckId(deck.getId())
-//                .format(deck.getFormat())
-//                .hero(deck.getHero())
-//                .name(deck.getName())
-//                .published(deck.isPublished())
-//                .updateTime(deck.getUpdateTime())
-//                .userId(deck.getUser().getId())
-//                .username(deck.getUser().getUsername())
-//                .votes(deck.getVotes())
-//    }
+    private DeckUserInfoDto buildDtoFromDeck(Deck deck) {
+        return DeckUserInfoDto.builder()
+                .deckcode(deck.getDeckcode())
+                .deckId(deck.getId())
+                .format(deck.getFormat())
+                .hero(deck.getHero())
+                .name(deck.getName())
+                .published(deck.isPublished())
+                .updateTime(deck.getUpdateTime())
+                .userId(deck.getUser().getId())
+                .username(deck.getUser().getUsername())
+                .votes(deck.getVotes())
+                .build();
+    }
 
     public void like(DeckUserInfoDto data) {
         Usr usr = userStorage.findUsrByUsername(data.getUsername());
